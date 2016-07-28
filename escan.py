@@ -11,7 +11,7 @@ anterior=list()
 def escanear():
     global anterior
     nuevo=list()
-    nm.scan(hosts=host_scan, arguments='-n -sP')
+    nm.scan(hosts=host_scan, arguments='-sP')
     hosts_list = [(x, nm[x]['status']['state']) for x in nm.all_hosts()]
     for host, status in hosts_list:
         print (host, status)
@@ -25,13 +25,16 @@ def escanear():
               #print("sumatoria :--"+str(sumatoria))
               if sumatoria==0:
                   print("Se ha conectado el host: "+str(i))
+          for k in anterior:
+              sumatoria=0
+              for l in nuevo:
+                  if str(k)== str(l):
+                     sumatoria+=1
+              #print("sumatoria :--"+str(sumatoria))
+              if sumatoria==0:
+                  print("Se ha desconectado el host: "+str(k))        
     anterior=nuevo
 while True:
     escanear()
     time.sleep(7)
-    
-
-        
-
-        
     
